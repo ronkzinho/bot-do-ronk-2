@@ -6,18 +6,6 @@ class Fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    async def bot_check(self, ctx):
-        if(ctx.command.name == "test"): return True
-        return ctx.guild is not None
-
-    @commands.command()
-    async def say(self, ctx, *args):
-        return await ctx.send(*args)
-
-    @commands.command()
-    async def test(self, ctx, *args):
-        return await ctx.send("Salve")
-
     @commands.command(aliases=["coffi", "coffe", "cof"])
     async def make(self, ctx):
         resposta = random.choice(["Ai meique cofe cofe fo ior dei ☕"] + ["Ai meique cofe cofe fo ior dei"] * 99)
