@@ -7,7 +7,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.channel.type == "private": return
+        if message.guild is None: return
         if message.author.bot: return
         if len(message.mentions) == 1 and message.mentions[0].id == self.client.user.id: return await message.channel.send("Sai fora!")
 
