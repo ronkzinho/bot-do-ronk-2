@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from discord.ext import commands
 
 load_dotenv()
-client = commands.Bot(command_prefix="><") 
+client = commands.Bot(command_prefix="><", case_insensitive=True) 
 
 for file in os.listdir("cogs"):
     if file.endswith(".py"):
