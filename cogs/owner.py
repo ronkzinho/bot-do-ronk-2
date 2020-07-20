@@ -2,7 +2,7 @@ import discord
 import inspect
 from discord.ext import commands
 
-class Adm(commands.Cog):
+class Owner(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -20,4 +20,4 @@ class Adm(commands.Cog):
             return await ctx.send(err)
 
 def setup(client):
-    client.add_cog(Adm(client))
+    client.add_cog(Owner(client))

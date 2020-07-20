@@ -13,7 +13,7 @@ class Fun(commands.Cog):
 
     @commands.command(aliases=["leticia"])
     async def roi(self, ctx):
-        return await ctx.send("Roi... {0} né?".format(ctx.message.author.display_name))
+        return await ctx.send(f"Roi... {ctx.message.author.display_name} né?")
     
     @commands.command(aliases=["karpa"])
     async def gadiao(self, ctx):
