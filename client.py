@@ -10,6 +10,8 @@ client = commands.Bot(command_prefix="><", case_insensitive=True)
 for file in os.listdir("cogs"):
     if file.endswith(".py"):
         name = file[:-3]
-        client.load_extension(f"cogs.{name}")
+        if str(name) == "__init__": pass
+        else:
+            client.load_extension(f"cogs.{name}")
 
 client.run(os.getenv("TOKEN"))
