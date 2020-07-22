@@ -13,6 +13,7 @@ class Adm(commands.Cog):
     async def ban(self, ctx, member: SearchMember=None, *, reason=None):
         if not member: return await ctx.send("Coloque um membro válido!")
         if member.id == ctx.author.id: return await ctx.send("Se banir?")
+        if member.id == ctx.guild.owner.id: raise commands.MissingPermissions("No")
         if member.top_role.position >= ctx.author.top_role.position: raise commands.MissingPermissions("No")
         if member.top_role.position >= ctx.guild.get_member(self.client.user.id).top_role.position: raise commands.BotMissingPermissions("No")
 
@@ -42,6 +43,7 @@ class Adm(commands.Cog):
         if not id: return await ctx.send("Digite um id!")
         member = await self.client.fetch_user(id)
         if not member: return await ctx.send("Coloque um membro válido!")
+        if not member in await ctx.guild.bans: return await ctx.send("Este membro não está banido!")
 
         msg = await ctx.send(f"Você tem certeza que deseja desbanir o(a) {member.display_name}?")
         await msg.add_reaction("✅")
@@ -69,6 +71,7 @@ class Adm(commands.Cog):
     async def kick(self, ctx, member: SearchMember=None, *, reason=None):
         if not member: return await ctx.send("Coloque um membro válido!")
         if member.id == ctx.author.id: return await ctx.send("Se kickar?")
+        if member.id == ctx.guild.owner.id: return commands.MissingPermissions("No")
         if member.top_role.position >= ctx.author.top_role.position: raise commands.MissingPermissions("No")
         if member.top_role.position >= ctx.guild.get_member(self.client.user.id).top_role.position: raise commands.BotMissingPermissions("No")
 
