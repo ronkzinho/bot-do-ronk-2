@@ -43,7 +43,8 @@ class Adm(commands.Cog):
         if not id: return await ctx.send("Digite um id!")
         member = await self.client.fetch_user(id)
         if not member: return await ctx.send("Coloque um membro válido!")
-        if not member in await ctx.guild.bans: return await ctx.send("Este membro não está banido!")
+        bans = await ctx.guild.bans
+        if not member in bans: return await ctx.send("Este membro não está banido!")
 
         msg = await ctx.send(f"Você tem certeza que deseja desbanir o(a) {member.display_name}?")
         await msg.add_reaction("✅")
