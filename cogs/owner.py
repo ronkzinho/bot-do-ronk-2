@@ -20,6 +20,7 @@ class Owner(commands.Cog):
             body = f"async def {fn_name}():\n{cmd}"
             parsed = ast.parse(body)
             body = parsed.body[0].body
+            insert_returns(body)
             env = {
                 'client': client,
                 'discord': discord,
@@ -28,7 +29,6 @@ class Owner(commands.Cog):
             }
             exec(compile(parsed, filename="<ast>", mode="exec"), env)
             result = (await eval(f"{fn_name}()", env))
-            insert_returns(body)
             await ctx.send(result)
         except Exception as e:
             await ctx.send(e)
