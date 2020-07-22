@@ -11,6 +11,11 @@ class Events(commands.Cog):
         return ctx.guild is not None
 
     @commands.Cog.listener()
+    async def on_ready(self):
+        await self.client.change_presence(activity=discord.Game(name='o joso pela janela', type=0))
+        print(f"\"{self.client.user.display_name}\" Ligado!")
+    
+    @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.bot: return
         if len(message.mentions) == 1 and message.mentions[0].id == self.client.user.id: return await message.channel.send("Sai fora!")
