@@ -12,7 +12,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        await self.client.change_presence(activity=discord.Game(name='o joso pela janela', type=0))
+        await self.client.change_presence(activity=discord.Game(name='trepa trepa com a sua mãe', type=0))
         print(f"\"{self.client.user.display_name}\" Ligado!")
     
     @commands.Cog.listener()
