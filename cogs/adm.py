@@ -29,9 +29,7 @@ class Adm(commands.Cog):
                 await ctx.send(f"<@{member.id}> banido com sucesso!")
             else:
                 await msg.delete()
-                okMsg = await ctx.send("ok")
-                await asyncio.sleep(5)
-                await okMsg.delete()
+                await ctx.send("ok", delete_after=10)
         except Exception:
             await msg.delete()
             return await ctx.message.delete()
@@ -58,9 +56,7 @@ class Adm(commands.Cog):
                 await ctx.send(f"<@{user.id}>, <@{member.id}> desbanido com sucesso!")
             else:
                 await msg.delete()
-                okMsg = await ctx.send("ok")
-                await asyncio.sleep(5)
-                await okMsg.delete()
+                await ctx.send("ok", delete_after=10)
 
         except asyncio.TimeoutError:
             await msg.delete()
@@ -88,9 +84,8 @@ class Adm(commands.Cog):
                 await ctx.send(f"<@{member.id}> kickado com sucesso!")
             else:
                 await msg.delete()
-                okMsg = await ctx.send("ok")
-                await asyncio.sleep(5)
-                await okMsg.delete()
+                await ctx.send("ok", delete_after=10)
+
         except Exception:
             await msg.delete()
             return await ctx.message.delete()

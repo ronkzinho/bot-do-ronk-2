@@ -1,5 +1,7 @@
 import discord
 import os
+import asyncio
+from datetime import datetime, timedelta
 from .functions.searchMember import SearchMember
 from discord.ext import commands
 
@@ -27,6 +29,29 @@ class Utility(commands.Cog):
         embed = discord.Embed(title=f"Avatar de {member.display_name}", description=f"**Clique [aqui]({avatar}) para baixar a imagem!**", color=member.color)
         embed.set_image(url=avatar)
         await ctx.send(embed=embed)
+    
+    @commands.command()
+    @commands.bot_has_guild_permissions(administrator=True, manage_messages=True)
+    async def clear(self, ctx, number:int=None, member: SearchMember=None):
+        if not number or number > 500 or number < 1: return await ctx.send("Insira um número válido!")
+        def check(msg):
+            if msg.id == ctx.message.id: return False
+            if member:
+                return msg.author.id == member.id
+            else:
+                return True
+        deleted = await ctx.channel.purge(limit=number+1, check=check, after=datetime.now() - timedelta(days=14))
+        await ctx.send(f'Deletei **{len(deleted)}/{number}**!', delete_after=5)
+        await asyncio.sleep(5)
+        await ctx.message.delete()
+    
+    @clear.error
+    async def on_clear_error(self, ctx, error):
+        if isinstance(error, commands.BotMissingPermissions):
+            pass
+        else:
+            raise error
+        
 
 def setup(client):
     client.add_cog(Utility(client))

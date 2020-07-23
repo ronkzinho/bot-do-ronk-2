@@ -43,7 +43,7 @@ class Owner(commands.Cog):
     @commands.is_owner()
     async def reload(self, ctx, *, module: str):
         try:
-            if(module == "all"):
+            if(module == "all" or module == "a"):
                 for cog in list(self.client.cogs):
                     self.client.unload_extension(f"cogs.{cog.lower()}")
                     self.client.load_extension(f"cogs.{cog.lower()}")
